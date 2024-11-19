@@ -1,14 +1,12 @@
 // ==UserScript==
 // @name         Extrator de Matrizes
 // @namespace    http://tampermonkey.net/
-// @version      v0.1
+// @version      v0.2
 // @description  try to take over the world!
 // @author       You
 // @match        http://sigeduca.seduc.mt.gov.br/geral/hwmgertrammatrizprincipal.aspx
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=gov.br
 // @grant        none
-// @updateURL    https://github.com/lksoumon/extrairMatrizes/raw/refs/heads/main/extrairMatrizes.user.js
-// @downloadURL   https://github.com/lksoumon/extrairMatrizes/raw/refs/heads/main/extrairMatrizes.user.js
 // ==/UserScript==
 
 // ----- stylesheet
@@ -92,6 +90,7 @@ function arrayToHtmlTable(dataArray) {
       }
     }
 
+var codEscola = '';
 var output = [["matriz","codigo Matriz","turno","areaConhecimento","Código Disciplina","Componente Curricular","H.A. Semanal","Obrigatória?","H.A","Semanas Letivas","H.A. Anual"]];
 var L = 0; var doOnce = 1; var turnTurno = "D";
 function cataDados(){
@@ -110,12 +109,12 @@ function cataDados(){
     }
 
     if(turnTurno == "D"){
-        ifrIframe1.src = "http://sigeduca.seduc.mt.gov.br/geral/hwmgergradematrizalt.aspx?"+matrizes[L-1]+",2025,10995,2,0,2,D,DSP,1,0";
+        ifrIframe1.src = "http://sigeduca.seduc.mt.gov.br/geral/hwmgergradematrizalt.aspx?"+matrizes[L-1]+",2025,"+codEscola+",2,0,2,D,DSP,1,0";
         ifrIframe1.addEventListener("load", cataMatriz);
     }
 
     if(turnTurno == "N"){
-        ifrIframe1.src = "http://sigeduca.seduc.mt.gov.br/geral/hwmgergradematrizalt.aspx?"+matrizes[L-1]+",2025,10995,2,0,2,N,DSP,1,0";
+        ifrIframe1.src = "http://sigeduca.seduc.mt.gov.br/geral/hwmgergradematrizalt.aspx?"+matrizes[L-1]+",2025,"+codEscola+",2,0,2,N,DSP,1,0";
         ifrIframe1.addEventListener("load", cataMatriz);
     }
 
@@ -211,10 +210,12 @@ function cataMatriz(){
        document.getElementById('fecha').addEventListener("click", fecharMenu);
        document.getElementById('exportarD').addEventListener("click", function () {
            turnTurno = "D"; // Atribuir o valor à variável
+           codEscola = document.getElementById("span_vGERLOTCOD").innerText.trim();
            cataDados(); // Chamar a função
        });
        document.getElementById('exportarN').addEventListener("click", function () {
            turnTurno = "N"; // Atribuir o valor à variável
+           codEscola = document.getElementById("span_vGERLOTCOD").innerText.trim();
            cataDados(); // Chamar a função
        });
 

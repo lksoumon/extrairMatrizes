@@ -7,6 +7,8 @@
 // @match        http://sigeduca.seduc.mt.gov.br/geral/hwmgertrammatrizprincipal.aspx
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=gov.br
 // @grant        none
+// @updateURL    https://github.com/lksoumon/extrairMatrizes/raw/refs/heads/main/extrairMatrizes.user.js
+// @downloadURL   https://github.com/lksoumon/extrairMatrizes/raw/refs/heads/main/extrairMatrizes.user.js
 // ==/UserScript==
 
 // ----- stylesheet
